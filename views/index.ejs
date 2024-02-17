@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand">Book Reviews</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/"> Most Recent</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rating" aria-disabled="true">Top Rated</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Book Reviews</h1>
+            <p class="lead">A responsive book review website complete with persisted data via PostgresSQL, a book cover API, Bootstrap, and all the backend Javascript you could want!</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+              <a href="/new" class="btn btn-primary">New Review</a>
+            </div>
+          </div>
+          <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+              <img class="rounded-lg-3" src="../images/books-unsplash.jpg" alt="books" width="720">
+          </div>
+        </div>
+      </div>
+=
+    <% books.forEach(book => { %>
+    <div class="container col-xl-8">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success-emphasis">Review Score: <%= book.rating%> </strong>
+            <h3 class="mb-2"><%=book.title%></h3>
+            <div class="mb-1 text-body-secondary"><%=book.review_date%></div>
+            <p class="mb-auto"><%=book.review.substring(0,300)%>...</p>
+            <a href="/<%=book.isbn%>" class="icon-link gap-1 icon-link-hover stretched-link">
+              Continue reading
+              <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+            </a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img class="rounded-sm-3" src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg" width="200" height="250">
+          </div>
+        </div>
+    </div>
+    <% }) %>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- bookForm.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Review Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4 font-weight-bold">Book Review Form</h2>
+    <form id="bookReviewForm" action="/new" method="post">
+      <!-- Review Date Field -->
+      <div class="form-group">
+        <label for="reviewDate" class="font-weight-bold">Review Date</label>
+        <input type="datetime-local" class="form-control" id="reviewDate" name="reviewDate" readonly>
+      </div>
+
+      <!-- Other Form Fields -->
+      <div class="form-group">
+        <label for="title" class="font-weight-bold">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="author" class="font-weight-bold">Author</label>
+        <input type="text" class="form-control" id="author" name="author" required>
+      </div>
+      <div class="form-group">
+        <label for="isbn" class="font-weight-bold">ISBN-10 or ISBN-13 (10-13 digits)</label>
+        <input type="number" class="form-control" id="isbn" name="isbn" required pattern="\d{10,13}">
+      </div>
+      <div class="form-group">
+        <label for="review" class="font-weight-bold">Long-form Review</label>
+        <textarea class="form-control" id="review" name="review" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rating" class="font-weight-bold">Rating (1-10)</label>
+        <!-- Use type="range" to display the rating as a slider -->
+        <input type="range" class="form-control-range" id="rating" name="rating" min="1" max="10" required onchange="updateRatingValue(this.value)">
+        <!-- Display numerical value of rating -->
+        <div id="ratingValue" class="rating-value mt-2"></div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Populate Review Date with current date and time
+    window.onload = function() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = ('0' + (now.getMonth() + 1)).slice(-2); // Adding leading zero if needed
+      var day = ('0' + now.getDate()).slice(-2); // Adding leading zero if needed
+      var hours = ('0' + now.getHours()).slice(-2); // Adding leading zero if needed
+      var minutes = ('0' + now.getMinutes()).slice(-2); // Adding leading zero if needed
+      var formattedDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+      document.getElementById('reviewDate').value = formattedDateTime;
+    };
+    
+    // Function to update the numerical value of rating
+    function updateRatingValue(value) {
+      document.getElementById('ratingValue').innerText = value;
+    }
+  </script>
+</body>
+</html>
